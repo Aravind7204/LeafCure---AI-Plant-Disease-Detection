@@ -1,0 +1,54 @@
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .left-con {
+        padding-top: 5%; /* Adjust top padding for medium screens */
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Adjust font size */
+    }
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack content vertically */
+        align-items: center;
+    }
+
+    .left-con {
+        text-align: center; /* Center-align text for smaller screens */
+        padding-top: 2%; /* Further adjust top padding */
+    }
+
+    img {
+        max-width: 80%; /* Reduce image size */
+    }
+}
+
+@media (max-width: 576px) {
+    .left-con h1 {
+        font-size: 2rem; /* Smaller font size for mobile */
+    }
+
+    img {
+        max-width: 100%; /* Full-width image on mobile */
+    }
+}
+
+
+
+/* Responsive Design: Better spacing and alignment */
+@media (max-width: 768px) {
+    .upl-file {
+        padding: 20px;
+    }
+
+    #solutionDisplay {
+        margin-top: 20px;
+    }
+
+    #getSolutionBtn {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+}

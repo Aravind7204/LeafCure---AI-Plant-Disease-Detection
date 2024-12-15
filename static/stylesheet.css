@@ -1,0 +1,358 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #e8e9e4;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure it's above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+}
+
+/* Background Styling */
+.bg-image {
+    background: linear-gradient(to right, #e8e9e4, #e8e9e4);
+    height: auto;
+    padding: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+
+}
+
+.mar-quee {
+    background-color: #e8e9e4;
+    color: red;
+}
+
+.mar-quee1 {
+    padding-top: 15px;
+    background-color: #e8e9e4;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+.mar-quee-ai {
+    padding-top: 45PX;
+    background-color: #e8e9e4;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+
+.home-1 {
+    padding-top: 20px;
+}
+
+.left-con {
+    padding-top: 180px;
+    padding-left: 30px;
+}
+
+.left-con-2 {
+    padding-top: 80px;
+    padding-left: 30px;
+}
+
+/* Left Content Styling */
+h1 {
+    color: #2c3e50;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.indented {
+    text-align: justify;
+    text-indent: 2em;
+}
+
+.btn-success {
+    background-color: #4caf50;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+/*Button(Get Started) style*/
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    text-align: center;
+}
+
+.instructions-list {
+    text-align: left;
+    /* Aligns the list items to the left */
+    margin: 10px 0;
+    padding-left: 20px;
+    /* Adds a left padding for better spacing */
+}
+
+.instructions-list li {
+    margin-bottom: 10px;
+    /* Adds space between the list items */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Image Styling */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.center-img {
+    display: block;
+    margin: 0 auto;
+    /* Center horizontally */
+    height: 600px;
+    /* Adjust height to make it larger */
+    width: 85%;
+    /* Maintain aspect ratio */
+}
+
+/* Center the image in the container */
+.image-container {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100%;
+    /* Ensure full height of the column */
+}
+
+
+/*2 Paragraph Style*/
+/* 2nd Paragraph Section Styling */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 57.5px;
+    /* Adjust based on navbar height */
+}
+
+.p2-container {
+    background-color: #e8e9e4;
+    padding-left: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: 100vh;
+    /* Ensure it takes up the full screen height */
+}
+
+.p2-heding {
+    padding-top: 15px;
+    color: rgba(255, 0, 0, 0.69);
+}
+
+/*Table style*/
+.table1 {
+    padding-top: 15px;
+}
+
+.table {
+    background-color: #e8e9e4;
+
+}
+
+/* Footer Styled Section*/
+.footer-1 {
+
+    background-color: #343a40;
+}
+
+footer {
+    background-color: #343a40;
+    /* Dark background */
+    color: white;
+    padding: 40px 0;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #d4d4d4;
+    text-decoration: underline;
+}
+
+footer h5 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+footer p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+footer .row {
+    margin-bottom: 20px;
+}
+
+footer .text-md-right {
+    text-align: right;
+}
+
+footer .text-center {
+    text-align: center;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .col-md-6 {
+    margin-bottom: 20px;
+}
+
+footer .col-md-12 {
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 0;
+    /* Remove top margin for footer */
+    background-color: #343a40;
+    /* Dark background */
+    color: white;
+    padding: 40px 0;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    cursor: pointer;
+}
+
+
+/*aipage.html page design*/
+
+.upl-file {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #ffffff;
+    margin-bottom: 50px;
+
+
+}
+
+
+/* Enhancing the Upload File Form */
+.upl-file {
+    background-color: #ffffff;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the "Get Solution" Button */
+#solutionDisplay {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply consistent button styling */
+#upload-form button {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 5px;
+}
+
+#upload-form button:hover {
+    background-color: #218838;
+    transition: background-color 0.3s;
+}
+
+/* Improve the layout of result display and buttons */
+#result {
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* Footer Adjustments */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 40px 0;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #d4d4d4;
+    text-decoration: underline;
+}
+
+
+/*about page design*/
+.about-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e9e4;
+    margin-bottom: 0%;
+}
+
+.about-developer {
+    font-family: 'Times New Roman', serif;
+    font-size: 22px;
+    line-height: 1.5;
+    padding-top: 0px;
+}
+
+.body-m {
+    background-color: #e8e9e4;
+}
+
+.privacy-p {
+    padding-left: 25px;
+}
+
+.h1-p {
+    padding-left: 12px;
+}
+

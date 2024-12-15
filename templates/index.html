@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Main Section -->
+<div class="container-fluid bg-image">
+
+
+  <div class="home-1 row align-items-start min-vh-100">
+    <!-- Left Content -->
+    <div class="left-con col-lg-6 col-md-5 col-sm-3 text-left">
+      <h1 class="display-4 font-weight-bold">Welcome to Plant Disease Recognition AI</h1>
+      <p class="lead text-muted">Discover solutions for plant health using AI-powered disease detection.</p>
+      <p class="mt-4 indented" style="text-indent: 2em;">
+        Welcome to the <strong>Plant Disease Recognition System</strong>! We're excited to have you here. This platform
+        is
+        designed to help you quickly and accurately identify plant diseases using cutting-edge AI technology. Our goal
+        is to provide a seamless experience to support you in maintaining the health of your plants. Thank you for
+        trusting us as your plant health assistant!
+      </p>
+      <button class="btn btn-success btn-lg" onclick="showInstructions()">Get Started</button>
+
+      <!-- Pop-up Modal (Initially Hidden) -->
+      <div id="instructionModal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+          <h3>Usage Instructions</h3>
+          <ul class="instructions-list">
+            <li>Use only one leaf photo for analysis.</li>
+            <li>Ensure the leaf belongs to one of the listed plants.</li>
+            <li>Upload a clear image for accurate disease detection.</li>
+            <li>Click "OK" to proceed to the disease detection page.</li>
+          </ul>
+          <button class="btn btn-primary" onclick="goToNextPage()">OK</button>
+
+        </div>
+      </div>
+      <script>
+        // Function to show the instructions modal
+        function showInstructions() {
+          document.getElementById('instructionModal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+          document.getElementById('instructionModal').style.display = 'none';
+        }
+
+        // Function to navigate to Aipage.html after clicking OK
+        function goToNextPage() {
+          window.location.href = '/detect';
+        }
+      </script>
+    </div>
+
+    <!-- Right Content -->
+    <div class="col-lg-6 col-md-5 col-sm-3 image-container">
+      <img src="{{ url_for('static', filename='img/file.png') }}" alt="Plant Disease Detection"
+        class="img-fluid center-img">
+
+    </div>
+  </div>
+</div>
+
+<!-- 2nd Paragraph Section -->
+<div class="p2-container">
+  <h2 class="p2-heding font-weight-bold text-center">Usage Instructions</h2>
+  <p class="p2-conten mt-3">
+  <h5>Ensure accurate results, please follow these simple guidelines:</h5>
+  </p>
+  <ul class="ul-con">
+    <li>Upload only <strong>one photo</strong> at a time.</li>
+    <li>The uploaded photo should contain <strong>only one leaf</strong> in clear focus.</li>
+    <li>Ensure that the leaf belongs to one of the supported plant classes listed below for optimal detection results.
+    </li>
+  </ul>
+  <p>
+    Following these steps will help us provide you with precise and reliable disease recognition.
+  </p>
+  <!--Table of lefe class-->
+  <div class="table1">
+    <table class="table">
+      <thead class="">
+        <tr>
+          <th colspan="4" scope="col" class="text-center">"The model has been trained to accurately predict the
+            following tree diseases"</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Apple</td>
+          <th scope="row">8</th>
+          <td>Pepper, bell</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Blueberry</td>
+          <th scope="row">9</th>
+          <td>Potato</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Cherry</td>
+          <th scope="row">10</th>
+          <td>Raspberry</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>Corn</td>
+          <th scope="row">11</th>
+          <td>Soybean</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>Grape</td>
+          <th scope="row">12</th>
+          <td>Squash</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>Orange</td>
+          <th scope="row">13</th>
+          <td>Strawberry</td>
+        </tr>
+        <tr>
+          <th scope="row">7</th>
+          <td>Peach</td>
+          <th scope="row">14</th>
+          <td>Tomato</td>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock%}

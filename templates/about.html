@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Pop-up Modal (Initially Hidden) -->
+<div id="instructionModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3>Usage Instructions</h3>
+    <ul class="instructions-list">
+      <li>Use only one leaf photo for analysis.</li>
+      <li>Ensure the leaf belongs to one of the listed plants.</li>
+      <li>Upload a clear image for accurate disease detection.</li>
+      <li>Click "OK" to proceed to the disease detection page.</li>
+    </ul>
+    <button class="btn btn-primary" onclick="goToNextPage()">OK</button>
+
+  </div>
+</div>
+<script>
+  // Function to show the instructions modal
+  function showInstructions() {
+    document.getElementById('instructionModal').style.display = 'flex';
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById('instructionModal').style.display = 'none';
+  }
+
+  // Function to navigate to Aipage.html after clicking OK
+  function goToNextPage() {
+    window.location.href = '/detect';
+  }
+</script>
+
+<header>
+  <h1 class="about-head">About the Developer</h1>
+</header>
+
+<!-- Main Section -->
+<div class="container-fluid bg-image">
+
+
+  <div class="home-1 row align-items-start min-vh-100">
+    <!-- Left Content -->
+    <div class="left-con-2 col-lg-6 col-md-5 col-sm-3 text-left">
+      <p class="mt-4 indented about-developer" style="text-indent: 2em;">
+        This project has been developed by a team of passionate developers: <strong>[Developer 1 Name]</strong>,
+        <strong>[Developer 2 Name]</strong>, and <strong>[Developer 3 Name]</strong>. Together, we have combined our
+        skills and knowledge to create this plant disease detection website,
+        aiming to provide a user-friendly and efficient platform for identifying plant diseases.
+        Each developer contributed their expertise in various aspects of the project, from backend development using
+        Python and Flask, to frontend design with HTML, CSS, and JavaScript.
+        Our goal is to empower farmers and gardening enthusiasts with the tools they need to keep their plants healthy
+        and thriving.
+        We hope you find this website helpful and informative. Thank you for using our platform!
+      </p>
+    </div>
+
+    <!-- Right Content -->
+    <div class="col-lg-6 col-md-5 col-sm-3 image-container">
+      <img src="{{ url_for('static', filename='img/thank-f.png') }}" alt="Plant Disease Detection"
+        class="img-fluid center-img">
+
+    </div>
+  </div>
+</div>
+{% endblock%}

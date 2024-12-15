@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Pop-up Modal (Initially Hidden) -->
+<div id="instructionModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Usage Instructions</h3>
+        <ul class="instructions-list">
+            <li>Use only one leaf photo for analysis.</li>
+            <li>Ensure the leaf belongs to one of the listed plants.</li>
+            <li>Upload a clear image for accurate disease detection.</li>
+            <li>Click "OK" to proceed to the disease detection page.</li>
+        </ul>
+        <button class="btn btn-primary" onclick="goToNextPage()">OK</button>
+
+    </div>
+</div>
+<script>
+    // Function to show the instructions modal
+    function showInstructions() {
+        document.getElementById('instructionModal').style.display = 'flex';
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        document.getElementById('instructionModal').style.display = 'none';
+    }
+
+    // Function to navigate to Aipage.html after clicking OK
+    function goToNextPage() {
+        window.location.href = '/detect';
+    }
+</script>
+<h1 class="h1-p">Privacy Policy</h1>
+</header>
+
+<main>
+    <section class="privacy-p">
+        <p>
+            1. Introduction This Privacy Policy explains how we collect, use, and protect your personal information when
+            you visit our website. By using our website, you consent to the practices outlined in this policy.<br>
+            2. Information We Collect We collect the following types of information:
+
+            Personal Identification Information: This includes your name, email address, and any other information you
+            provide when filling out forms or registering on our website.
+            Usage Data: We collect non-personally identifiable data such as your IP address, browser type, pages
+            visited, and time spent on the website for analytics purposes.<br>
+            3. How We Use Your Information We use your information for the following purposes:
+
+            To provide and improve the services on our website.
+            To send you updates, promotions, or other information if you have opted in.
+            To monitor and analyze website usage for improving our services.
+            <br>
+            4. Data Security We take appropriate security measures to protect your personal data from unauthorized
+            access, alteration, or disclosure. However, no data transmission over the internet is completely secure, and
+            we cannot guarantee its absolute security.<br>
+
+            5. Cookies We use cookies to enhance your experience on our website. Cookies are small files that are stored
+            on your device. You can disable cookies through your browser settings, but this may affect your user
+            experience on our website.<br>
+
+            6. Third-Party Links Our website may contain links to third-party websites. We are not responsible for the
+            privacy practices of these external sites. Please review their privacy policies before providing any
+            personal information.<br>
+
+            7. Data Sharing We do not sell or rent your personal information to third parties. However, we may share
+            your information with trusted service providers to perform functions on our behalf (e.g., payment
+            processing, website hosting). These providers are obligated to protect your information and use it only for
+            the purposes we specify.<br>
+
+            8. Children’s Privacy Our website is not intended for use by children under the age of 13, and we do not
+            knowingly collect personal information from children. If you believe we have collected information from a
+            child, please contact us immediately.<br>
+
+            9. Changes to the Privacy Policy We reserve the right to update this Privacy Policy at any time. We will
+            notify users of any significant changes by posting the revised policy on this page.<br>
+
+            10. Contact Us If you have any questions about our User Terms or Privacy Policy, please contact us at [Your
+            Email Address].<br>
+        </p>
+        <!-- Add the rest of your privacy policy content here -->
+    </section>
+    <!-- Continue with other sections as needed -->
+</main>
+
+
+{% endblock%}
