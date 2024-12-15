@@ -10,4 +10,4 @@ werkzeug==3.0.6
 json5==0.9.28
 jsonpointer==3.0.0
 jsonschema==4.23.0
-gunicorn==20.1.0
+uvicorn
