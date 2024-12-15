@@ -1,130 +1,76 @@
-from flask import Flask, request, render_template, jsonify, send_from_directory
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import tensorflow as tf
 import numpy as np
-import os
-from werkzeug.utils import secure_filename
-import json
+from PIL import Image
+import io
 
+# Initialize the Flask app and CORS
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
 
-# Load the trained model globally (only once at app startup)
-try:
-    model = tf.keras.models.load_model('trained_plant_disease_model.h5')
-    print("Model loaded successfully!")
-except Exception as e:
-    print(f"Error loading model: {e}")
+# Load your trained model
+model = tf.keras.models.load_model('path_to_your_model.h5')  # Replace with your model path
+solutions = {
+    "Apple___Apple_scab": {
+        "solution": "Apply fungicide to control the disease.",
+        "product_link": "https://example.com/fungicide"
+    },
+    "Apple___healthy": {
+        "solution": "No disease detected. Keep monitoring."
+    }
+}
 
-# Load solutions for diseases (again, only once at app startup)
-try:
-    with open('./static/solutions/solutions.json', 'r') as file:
-        solutions = json.load(file)
-    print("Solutions loaded successfully!")
-except Exception as e:
-    print(f"Error loading solutions: {e}")
-
-# Function to check allowed file types
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-# Function to make predictions
-def model_prediction(image_path):
-    try:
-        image = tf.keras.preprocessing.image.load_img(image_path, target_size=(64, 64))  # Match input size for your model
-        input_arr = tf.keras.preprocessing.image.img_to_array(image)
-        input_arr = np.array([input_arr])  # Convert single image to batch
-        predictions = model.predict(input_arr)
-        
-        # Get the predicted class and the associated probability
-        predicted_class = np.argmax(predictions)  # Class with the highest probability
-        predicted_probability = np.max(predictions)  # The highest probability value
-        
-        return predicted_class, predicted_probability
-    except Exception as e:
-        print(f"Error in prediction: {e}")
-        raise
-
-# Route to serve uploaded files
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-# Routes
+# Route for the main page
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
-
-@app.route('/terms')
-def terms():
-    return render_template('terms.html')
-
-@app.route('/privacy')
-def privacy():
-    return render_template('privacy-policy.html')
-
-@app.route('/about')  # Route for the About Developer page
-def about():
-    return render_template('about.html')
-
-@app.route('/detect')
-def detect_page():
-    return render_template('aipage.html')
-
+# Route to handle image upload and prediction
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
-
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No file selected"}), 400
-
-    if not allowed_file(file.filename):
-        return jsonify({"error": "Invalid file type. Only image files are allowed."}), 400
-
-    filename = secure_filename(file.filename)
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    try:
-        file.save(file_path)
-        
-        # Make prediction
-        result_index, probability = model_prediction(file_path)
-        
-        # Class labels
-        class_name = ['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
-                      'Blueberry___healthy', 'Cherry_(including_sour)___Powdery_mildew', 
-                      'Cherry_(including_sour)___healthy', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 
-                      'Corn_(maize)___Common_rust_', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___healthy', 
-                      'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 
-                      'Grape___healthy', 'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot',
-                      'Peach___healthy', 'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 
-                      'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 
-                      'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 
-                      'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 
-                      'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 
-                      'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 
-                      'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus',
-                      'Tomato___healthy']
-
-        predicted_label = class_name[result_index]
-        return jsonify({
-            "label": predicted_label,
-            "probability": float(probability),  # Convert the probability to a float for JSON serialization
-            "filename": filename,
-            "file_url": f"/uploads/{filename}"  # Provide a relative path to the uploaded file
-        })
+        return jsonify({'error': 'No file part'}), 400
     
-    except Exception as e:
-        return jsonify({"error": f"Unable to process the image: {str(e)}"}), 500
+    file = request.files['file']
+    
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
 
+    try:
+        # Load and process image
+        image = Image.open(file.stream)
+        image = image.resize((224, 224))  # Adjust size according to your model
+        image = np.array(image) / 255.0  # Normalize image if necessary
+        image = np.expand_dims(image, axis=0)  # Add batch dimension
+
+        # Predict using the model
+        prediction = model.predict(image)
+        predicted_class = np.argmax(prediction, axis=1)
+        predicted_label = str(predicted_class[0])  # This should match your label
+        predicted_probability = np.max(prediction)
+
+        return jsonify({
+            'label': predicted_label,
+            'probability': predicted_probability
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Route to get the solution based on disease name
 @app.route('/get_solution', methods=['POST'])
 def get_solution():
-    disease_name = request.json.get('disease_name')  # Ensure the correct key name
-    solution = solutions.get(disease_name, "Solution not found for this disease.")
-    return jsonify({"disease_name": disease_name, "solution": solution})
+    data = request.get_json()
+    disease_name = data.get('disease_name')
+
+    # Retrieve the solution for the disease
+    solution = solutions.get(disease_name)
+    
+    if solution:
+        return jsonify({"solution": solution})
+    else:
+        return jsonify({"solution": "No solution found for this disease."})
 
 if __name__ == '__main__':
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    app.run(debug=False)
+    app.run(debug=True)
