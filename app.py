@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
 
 # Load your trained model
-model = tf.keras.models.load_model('path_to_your_model.h5')  # Replace with your model path
+model = tf.keras.models.load_model('trained_plant_disease_model.h5')  # Replace with your model path
 solutions = {
     "Apple___Apple_scab": {
         "solution": "Apply fungicide to control the disease.",
