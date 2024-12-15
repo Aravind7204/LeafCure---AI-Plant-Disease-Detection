@@ -10,7 +10,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # Load the trained model globally
-model = tf.keras.models.load_model('trained_plant_disease_model.keras')
+model = tf.keras.models.load_model('https://github.com/Aravind7204/LeafCure---AI-Plant-Disease-Detection/blob/4afbe3ffa3cad8cec5517b448af81eb7a069e3de/trained_plant_disease_model.keras')
 
 with open('./static/solutions/solutions.json', 'r') as file:
     solutions = json.load(file)
