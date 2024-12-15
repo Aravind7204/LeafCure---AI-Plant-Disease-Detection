@@ -4,7 +4,9 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
-
+import json
+from werkzeug.utils import secure_filename
+import os
 # Initialize the Flask app and CORS
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
