@@ -1,6 +1,6 @@
-tensorflow==2.10.0
-tensorflow-base==2.10.0
-tensorflow-estimator==2.10.0
+tensorflow
+tensorflow-base
+tensorflow-estimator
 numpy==1.26.4
 numpy-base==1.26.4
 aiosignal==1.2.0
