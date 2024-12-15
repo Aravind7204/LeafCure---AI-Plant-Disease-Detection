@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- File Upload Form -->
+<div class="upl-file container mt-5 rounded shadow-lg p-4">
+  <h2 class="text-center mb-4">Upload an Image of a Plant Leaf</h2>
+  <form id="upload-form" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="file" id="file" name="file" accept="image/*" class="form-control-file" required>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btn-lg">Upload and Predict</button>
+    </div>
+  </form>
+
+  <!-- Show uploaded image -->
+  <div id="uploadedImage" class="text-center mt-3" style="display:none;">
+    <h5>Uploaded Image:</h5>
+    <img id="imagePreview" class="img-fluid" src="" alt="Uploaded Image" />
+  </div>
+
+  <div id="result" class="mt-3"></div>
+</div>
+
+<div class="text-center mt-4">
+  <button id="getSolutionBtn" class="btn btn-primary btn-lg" style="display:none;">Get Solution</button>
+</div>
+<div id="solutionDisplay" class="text-center mt-3"></div>
+
+<script>
+  const form = document.getElementById('upload-form');
+  const resultDiv = document.getElementById('result');
+  const imagePreview = document.getElementById('imagePreview');
+  const uploadedImageDiv = document.getElementById('uploadedImage');
+  let disease_name = null;
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const file = document.getElementById('file').files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch('/predict', { method: 'POST', body: formData });
+    const result = await response.json();
+
+    // Display uploaded image
+    if (response.ok) {
+      const fileURL = URL.createObjectURL(file);
+      imagePreview.src = fileURL;
+      uploadedImageDiv.style.display = 'block';
+
+      resultDiv.innerHTML = `<p><strong>Prediction:</strong> ${result.label}</p>
+                               <p><strong>Confidence:</strong> ${(result.probability * 100).toFixed(2)}%</p>`;
+
+      // Display the "Get Solution" button
+      document.getElementById('getSolutionBtn').style.display = 'inline';
+      disease_name = result.label;  // Store the disease name
+    } else {
+      resultDiv.innerHTML = `<p class="text-danger"><strong>Error:</strong> ${result.error}</p>`;
+    }
+  };
+
+  // Event listener for "Get Solution" button
+  document.getElementById('getSolutionBtn').addEventListener('click', async function () {
+    if (!disease_name) return;
+
+    const response = await fetch('/get_solution', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ disease_name: disease_name })
+    });
+
+    const data = await response.json();
+
+    if (data.solution) {
+      let solutionText = '';
+
+      // Check if the solution is an object (for diseases with a product link)
+      if (typeof data.solution === 'object') {
+        solutionText = `<p class="solution-text"><strong>Solution:</strong><br>${data.solution.solution}</p>`;
+        if (data.solution.product_link) {
+          solutionText += `<p class="solution-text">Buy the recommended product: <a href="${data.solution.product_link}" target="_blank">Click here</a></p>`;
+        }
+      } else {
+        solutionText = `<p class="solution-text"><strong>Solution:</strong><br>${data.solution}</p>`;
+      }
+
+
+      document.getElementById('solutionDisplay').innerHTML = solutionText;
+    } else {
+      document.getElementById('solutionDisplay').innerHTML = `<p>No solution found for this disease.</p>`;
+    }
+  });
+
+</script>
+
+<style>
+  .solution-text {
+    /* Indent the text */
+    text-align: justify;
+    /* Justify the text */
+    font-family: 'Times New Roman', serif;
+    /* Set font to Times New Roman */
+    font-size: 16px;
+    /* Adjust font size */
+    line-height: 1.6;
+    /* Adjust line height for better readability */
+  }
+</style>
+
+{% endblock %}

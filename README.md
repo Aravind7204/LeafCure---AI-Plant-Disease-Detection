@@ -1,0 +1,1 @@
+# LeafCure---Plant-Disease-Detection-and-Solution-Recommender

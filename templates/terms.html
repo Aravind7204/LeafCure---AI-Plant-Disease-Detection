@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Pop-up Modal (Initially Hidden) -->
+<div id="instructionModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Usage Instructions</h3>
+        <ul class="instructions-list">
+            <li>Use only one leaf photo for analysis.</li>
+            <li>Ensure the leaf belongs to one of the listed plants.</li>
+            <li>Upload a clear image for accurate disease detection.</li>
+            <li>Click "OK" to proceed to the disease detection page.</li>
+        </ul>
+        <button class="btn btn-primary" onclick="goToNextPage()">OK</button>
+
+    </div>
+</div>
+<script>
+    // Function to show the instructions modal
+    function showInstructions() {
+        document.getElementById('instructionModal').style.display = 'flex';
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        document.getElementById('instructionModal').style.display = 'none';
+    }
+
+    // Function to navigate to Aipage.html after clicking OK
+    function goToNextPage() {
+        window.location.href = '/detect';
+    }
+</script>
+
+
+<header>
+    <h1 class="h1-p">User Terms</h1>
+</header>
+
+<main>
+    <section class="privacy-p">
+        <p>
+            1. Introduction Welcome to our website! By accessing and using this website, you agree to comply with and be
+            bound by the following terms and conditions of use, which together with our Privacy Policy govern our
+            relationship with you. If you do not agree with any of these terms, please do not use this website.<br>
+
+            2. Use of the Website You may use the website for personal, non-commercial purposes only. You agree not to
+            engage in any activity that could harm the website’s functionality or security.<br>
+
+            3. Account Registration (if applicable) To use certain features of our website, you may be required to
+            create an account. You agree to provide accurate and complete information when creating an account, and you
+            are responsible for maintaining the confidentiality of your account credentials.<br>
+
+            4. Intellectual Property All content, including text, images, and graphics on the website, are protected by
+            copyright and intellectual property laws. You may not reproduce, modify, or distribute any content without
+            prior written consent.<br>
+
+            5. Limitation of Liability We strive to provide accurate information, but we make no warranties about the
+            accuracy, reliability, or completeness of the content on the website. We are not liable for any damage
+            caused by the use of the website.<br>
+
+            6. Privacy Your privacy is important to us. Please refer to our Privacy Policy for details on how we collect
+            and use your personal information.<br>
+
+            7. Changes to Terms We may update these terms from time to time. All changes will be posted on this page,
+            and you are advised to review the terms periodically.<br>
+
+            8. Governing Law These terms are governed by the laws of [Your Country]. Any disputes will be resolved in
+            the courts located in [Your Country].<br>
+        </p>
+        <!-- Add the rest of your terms content here -->
+    </section>
+    <!-- Continue with other sections as needed -->
+</main>
+
+
+
+{% endblock%}

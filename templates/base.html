@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Recognition</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/stylesheet.css">
+    <link rel="stylesheet" href="../static/respcss.css">
+</head>
+
+<body class="body-m">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" onclick="showInstructions()">Detect Here</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About Developer</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="mar-quee1">
+        <marquee behavior="scroll" direction="left" class="mar-quee"><strong>Basaveshwar Engineering College Bagalkote
+            </strong> Department of Information Science and Engineering
+        </marquee>
+    </div>
+
+
+    {% block content %}
+
+    {% endblock%}
+
+
+
+    <!-- Footer Section -->
+    <div class="footer-1">
+        <footer class="footer bg-dark text-white py-5">
+            <div class="container">
+                <!-- Contact Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Want to get in touch? We’d love to hear from you!</h5>
+                        <p>Email us at :- <a href="mailto:aravindsomanagoudra0@gmail.com" class="text-white">Personal
+                                Mail</a></p>
+                        <p>Join our :- <a href="https://www.becbgk.edu/" class="text-white" target="_blank">Over
+                                College</a></p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <p>&copy; 2024 BEC ISE.</p>
+                        <p>
+                            <a href="/terms" class="text-white">User Terms</a> |
+                            <a href="/privacy" class="text-white">Privacy</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Additional Links Section -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            <a class="text-white" onclick="showInstructions()">Detect Here</a> |
+                            <a href="/about" class="text-white">About</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
