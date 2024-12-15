@@ -40,7 +40,14 @@
     const formData = new FormData();
     formData.append('file', file);
     const response = await fetch('/predict', { method: 'POST', body: formData });
+
+    // Debugging
+    console.log("Response Status:", response.status);
+    
     const result = await response.json();
+    
+    // Check for error in response
+    console.log("Prediction Result:", result);
 
     // Display uploaded image
     if (response.ok) {
@@ -83,7 +90,6 @@
       } else {
         solutionText = `<p class="solution-text"><strong>Solution:</strong><br>${data.solution}</p>`;
       }
-
 
       document.getElementById('solutionDisplay').innerHTML = solutionText;
     } else {
