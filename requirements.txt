@@ -12,4 +12,4 @@ jsonschema-specifications==2024.10.1
 jsonschema-with-format-nongpl==4.23.0
 python-fastjsonschema==2.20.0
 python-json-logger==2.0.7
-gunicorn
+gunicorn==20.1.0
