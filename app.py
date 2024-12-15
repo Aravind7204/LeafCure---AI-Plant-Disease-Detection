@@ -9,11 +9,20 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-# Load the trained model globally
-model = tf.keras.models.load_model('trained_plant_disease_model.h5')
+# Load the trained model globally (only once at app startup)
+try:
+    model = tf.keras.models.load_model('trained_plant_disease_model.h5')
+    print("Model loaded successfully!")
+except Exception as e:
+    print(f"Error loading model: {e}")
 
-with open('./static/solutions/solutions.json', 'r') as file:
-    solutions = json.load(file)
+# Load solutions for diseases (again, only once at app startup)
+try:
+    with open('./static/solutions/solutions.json', 'r') as file:
+        solutions = json.load(file)
+    print("Solutions loaded successfully!")
+except Exception as e:
+    print(f"Error loading solutions: {e}")
 
 # Function to check allowed file types
 def allowed_file(filename):
@@ -109,14 +118,12 @@ def predict():
     
     except Exception as e:
         return jsonify({"error": f"Unable to process the image: {str(e)}"}), 500
-    
+
 @app.route('/get_solution', methods=['POST'])
 def get_solution():
     disease_name = request.json.get('disease_name')  # Ensure the correct key name
     solution = solutions.get(disease_name, "Solution not found for this disease.")
     return jsonify({"disease_name": disease_name, "solution": solution})
-
-
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
