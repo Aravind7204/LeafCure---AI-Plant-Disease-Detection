@@ -1,8 +1,5 @@
 tensorflow
-tensorflow-base
-tensorflow-estimator
 numpy==1.26.4
-numpy-base==1.26.4
 aiosignal==1.2.0
 werkzeug==3.0.6
 json5==0.9.28
